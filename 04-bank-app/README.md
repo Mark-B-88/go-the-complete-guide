@@ -305,7 +305,7 @@ func main() {
 
 ---
 
-# Writing to files to persis data
+# Writing to file to persist data
 
 ```go
 package main
@@ -652,4 +652,3 @@ if err != nil {
 ```
 
 ---
-
