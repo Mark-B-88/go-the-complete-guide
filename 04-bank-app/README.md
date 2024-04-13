@@ -652,3 +652,9 @@ if err != nil {
 ```
 
 ---
+
+# Adding 3rd party packages
+
+`go get github.com/Pallinder/go-randomdata`
+
+---

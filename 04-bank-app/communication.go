@@ -14,7 +14,6 @@ func presentOptions() {
 }
 
 func closingStatement() {
-	fmt.Println()
 	fmt.Println("Thanks for choosing our bank")
 	fmt.Println()
 }
