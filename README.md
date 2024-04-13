@@ -49,3 +49,15 @@ Working with Go Packages
 - Splitting Code Across Multiple Files
 - Splitting Code Across Multiple Packages
 - Importing & Using Custom Packages
+
+---
+
+# Understanding Pointers
+
+Working With Addresses Instead of Values
+
+- What are pointers?
+- Why does this feature exist?
+- How can you work with pointers?
+
+---
