@@ -41,3 +41,11 @@ Understanding the **_key_** components of a Go Program
 - Core Language Features
 
 ---
+
+# Packages - A Closer Look
+
+Working with Go Packages
+
+- Splitting Code Across Multiple Files
+- Splitting Code Across Multiple Packages
+- Importing & Using Custom Packages
