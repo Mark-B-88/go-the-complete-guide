@@ -161,3 +161,61 @@ func getUserData(promptText string) string {
 ```
 
 ---
+
+# Mutation Methods
+
+When mutating methods, you need to define the method with a **_pointer receiver_**, otherwise it won't mutate anything because it's only passing a copy. For example, in the `clearUserName` function, if you don't define the method with a **_pointer receiver_**, it will not clear the name, it will only pass a copy.
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type user struct {
+	firstName string
+	lastName  string
+	birthDate string
+	createdAt time.Time
+}
+
+func (u user) outputuserDetails() {
+	fmt.Println(u.firstName, u.lastName, u.birthDate)
+}
+
+func (u *user) clearUserName() {
+	u.firstName = ""
+	u.lastName = ""
+}
+
+func main() {
+	userFirstName := getUserData("Please enter your first name: ")
+	userLastName := getUserData("Please enter your last name: ")
+	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
+
+	var appUser user
+
+	appUser = user{
+		firstName: userFirstName,
+		lastName:  userLastName,
+		birthDate: userBirthdate,
+		createdAt: time.Now(),
+	}
+
+	appUser.outputuserDetails()
+	appUser.clearUserName()
+	appUser.outputuserDetails()
+}
+
+func getUserData(promptText string) string {
+	fmt.Print(promptText)
+	var value string
+	fmt.Scan(&value)
+	return value
+}
+```
+
+---
+
