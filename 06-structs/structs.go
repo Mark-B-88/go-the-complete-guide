@@ -19,14 +19,6 @@ func main() {
 
 	var appUser user
 
-	// Alternative Struct Notation
-	// appUser = user{
-	// 	userFirstName,
-	// 	userLastName,
-	// 	userBirthdate,
-	// 	time.Now(),
-	// }
-
 	appUser = user{
 		firstName: userFirstName,
 		lastName:  userLastName,
@@ -34,10 +26,10 @@ func main() {
 		createdAt: time.Now(),
 	}
 
-	outputuserDetails(appUser)
+	outputuserDetails(&appUser) // assigns the pointer
 }
 
-func outputuserDetails(u user) {
+func outputuserDetails(u *user) { // deferences the pointer
 	fmt.Println(u.firstName, u.lastName, u.birthDate)
 }
 
