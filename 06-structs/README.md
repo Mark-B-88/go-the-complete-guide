@@ -52,6 +52,8 @@ func getUserData(promptText string) string {
 }
 ```
 
+---
+
 # Structs & Pointers
 
 Take a close look at how you are assigning the pointer and also deferencing the pointer. You don't explicitly have to do this, but it's also valid : 
@@ -107,3 +109,55 @@ func getUserData(promptText string) string {
 	return value
 }
 ```
+
+---
+
+# Introducing Methods
+
+By defining a method, we can now associate the function directly with the **_user_** object. This is a good approach to encapsulate functionality.
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+type user struct {
+	firstName string
+	lastName  string
+	birthDate string
+	createdAt time.Time
+}
+
+func (u user) outputuserDetails() {
+	fmt.Println(u.firstName, u.lastName, u.birthDate)
+}
+
+func main() {
+	userFirstName := getUserData("Please enter your first name: ")
+	userLastName := getUserData("Please enter your last name: ")
+	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
+
+	var appUser user
+
+	appUser = user{
+		firstName: userFirstName,
+		lastName:  userLastName,
+		birthDate: userBirthdate,
+		createdAt: time.Now(),
+	}
+
+	appUser.outputuserDetails()
+}
+
+func getUserData(promptText string) string {
+	fmt.Print(promptText)
+	var value string
+	fmt.Scan(&value)
+	return value
+}
+```
+
+---
