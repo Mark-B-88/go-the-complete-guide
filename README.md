@@ -61,3 +61,13 @@ Working With Addresses Instead of Values
 - How can you work with pointers?
 
 ---
+
+# Structs
+
+Grouping Data & Functions Into Collections
+
+- What are Structs?
+- Creating & Using Structs
+- Adding Methods To Structs
+
+---
