@@ -350,3 +350,86 @@ func getUserData(promptText string) string {
 ```
 
 ---
+
+# Structs, Packages and Exports
+
+`/structs.go`
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"example.com/structs/user"
+)
+
+func main() {
+	userFirstName := getUserData("Please enter your first name: ")
+	userLastName := getUserData("Please enter your last name: ")
+	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
+
+	var appUser *user.User
+
+	appUser, err := user.NewUser(userFirstName, userLastName, userBirthdate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	appUser.OutputuserDetails()
+	appUser.ClearUserName()
+	appUser.OutputuserDetails()
+}
+
+func getUserData(promptText string) string {
+	fmt.Print(promptText)
+	var value string
+	fmt.Scanln(&value)
+	return value
+}
+```
+
+`/user/user.go`
+
+```go
+package user
+
+import (
+	"errors"
+	"fmt"
+	"time"
+)
+
+type User struct {
+	firstName string
+	lastName  string
+	birthDate string
+	createdAt time.Time
+}
+
+func (u User) OutputuserDetails() {
+	fmt.Println(u.firstName, u.lastName, u.birthDate)
+}
+
+func (u *User) ClearUserName() {
+	u.firstName = ""
+	u.lastName = ""
+}
+
+func NewUser(firstName, lastName, birthDate string) (*User, error) {
+	if firstName == "" || lastName == "" || birthDate == "" {
+		return nil, errors.New("firstname, lastname and birthdate are required")
+	}
+
+	return &User{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}, nil
+}
+```
+
+---
