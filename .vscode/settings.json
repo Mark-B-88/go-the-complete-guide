@@ -37,7 +37,7 @@
 	"terminal.integrated.fontWeightBold": "normal",
 	"terminal.integrated.drawBoldTextInBrightColors": false,
 	/* Workbench Settings */
-	"workbench.editor.showTabs": true,
+	"workbench.editor.showTabs": "multiple",
 	"workbench.statusBar.visible": false,
 	"workbench.iconTheme": "eq-material-theme-icons-darker",
 	"workbench.colorTheme": "United Ubuntu",

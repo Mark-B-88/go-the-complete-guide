@@ -433,3 +433,11 @@ func NewUser(firstName, lastName, birthDate string) (*User, error) {
 ```
 
 ---
+
+# Struct Embedding
+
+```go
+// code here...
+```
+
+---
