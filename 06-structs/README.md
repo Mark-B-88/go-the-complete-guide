@@ -436,8 +436,72 @@ func NewUser(firstName, lastName, birthDate string) (*User, error) {
 
 # Struct Embedding
 
+- Struct embedding in Go allows a struct to **_inherit_** fields and methods from another struct.
+- It's a way to achieve **_composition_** and resuse without explicitly using **_inheritance_**.
+
+In this example, the **_Admin_** struct embeds the **_User_** struct. This means that an **_Admin_** object inherits the fields and methods of the **_User_** struct without explictly declaring them again.
+
+- The **_Admin_** struct embeds the **_User_** struct anonymously, because there's no field name assigned to it, although you could also assign one as well.
+- That implies that the fields and methods of the **_User_** struct can be accessed directly by the **_Admin_** object.
+
+Similar to Python or Java, you can think of this as a form of "inheritance", and also a way to **_separate concerns_**.
+
 ```go
-// code here...
+package user
+
+import (
+	"errors"
+	"fmt"
+	"time"
+)
+
+type User struct {
+	firstName string
+	lastName  string
+	birthDate string
+	createdAt time.Time
+}
+
+type Admin struct {
+	email string
+	password string
+	User
+}
+
+func (u User) OutputuserDetails() {
+	fmt.Println(u.firstName, u.lastName, u.birthDate)
+}
+
+func (u *User) ClearUserName() {
+	u.firstName = ""
+	u.lastName = ""
+}
+
+func NewAdmin(email, password string) Admin {
+	return Admin {
+		email: email,
+		password: password,
+		User: User {
+			firstName: "ADMIN",
+			lastName: "ADMIN",
+			birthDate: "---",
+			createdAt: time.Now(),
+		},
+	}
+}
+
+func NewUser(firstName, lastName, birthDate string) (*User, error) {
+	if firstName == "" || lastName == "" || birthDate == "" {
+		return nil, errors.New("firstname, lastname and birthdate are required")
+	}
+
+	return &User{
+		firstName: firstName,
+		lastName:  lastName,
+		birthDate: birthDate,
+		createdAt: time.Now(),
+	}, nil
+}
 ```
 
 ---
