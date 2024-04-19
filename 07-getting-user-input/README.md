@@ -149,3 +149,59 @@ func printSomething(value interface{}) {
 ```
 
 ---
+
+# Extrating Type Information From Values
+
+This `value.(value-type)` can help you extract type information from values. The naming convention is not mandatory, you can name it depending on your **_use-case_**.
+
+And that's what this means:
+
+`valueType, boolean-value := value.(value-type)`
+`intVal, ok := value.(int)`
+
+You can make conditionals based on either the true or false response.
+
+```go
+func printSomething(value interface{}) {
+	// valueType, boolean-value := value.(value-type)
+	intVal, ok := value.(int)
+
+	if ok {
+		fmt.Println("Integer: ", intVal)
+		return
+	}
+
+	floatVal, ok := value.(float64)
+
+	if ok {
+		fmt.Println("Float: ", floatVal)
+		return
+	}
+
+	strVal, ok := value.(string)
+
+	if ok {
+		fmt.Println(strVal)
+		return
+	}
+}
+```
+
+You could also do a switch statement style:
+
+```go
+func printSomething(value interface{}) {
+	switch value.(type) {
+	case int:
+		fmt.Println("Integer: ", value)
+	case float64:
+		fmt.Println("Float: ", value)
+	case string:
+		fmt.Println(value)
+	}
+}
+```
+
+You could also set a default, or not, it depends on your **_use-case_**.
+
+---
