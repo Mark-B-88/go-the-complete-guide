@@ -130,3 +130,22 @@ func getUserInput(prompt string) string {
 ```
 
 ---
+
+# The Special "Any Value Allowed" Type
+
+```go
+func main() {
+	printSomething(1)
+	printSomething(1.5)
+	printSomething("Hello World")
+}
+
+// The Special "Any Value Allowed" type
+// any value is allowed, int, string, etc, etc
+// you can either state interface {} or "any"
+func printSomething(value interface{}) {
+	fmt.Println(value)
+}
+```
+
+---
