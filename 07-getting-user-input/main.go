@@ -10,6 +10,10 @@ import (
 	"example.com/note/todo"
 )
 
+type saver interface {
+	Save() error
+}
+
 func main() {
 	title, content := getNoteData()
 	todoText := getUserInput("Todo text: ")
@@ -29,24 +33,30 @@ func main() {
 	}
 
 	todo.Display()
-	err = todo.Save()
+	err = saveData(todo)
 
 	if err != nil {
-		fmt.Println("saving the todo failed")
 		return
 	}
 
-	fmt.Println("saving the todo succeeded")
-
 	userNote.Display()
-	err = userNote.Save()
+	err = saveData(userNote)
+
+	if err != nil {
+		return
+	}
+}
+
+func saveData(data saver) error {
+	err := data.Save()
 
 	if err != nil {
 		fmt.Println("saving the note failed")
-		return
+		return err
 	}
 
 	fmt.Println("saving the note succeeded")
+	return nil
 }
 
 func getNoteData() (string, string) {
