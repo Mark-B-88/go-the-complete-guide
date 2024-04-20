@@ -25,3 +25,13 @@ func main() {
 	fmt.Println(string(prettyJSON))
 }
 ```
+
+---
+
+# Mutating Maps
+
+```go
+// code here...
+```
+
+---
