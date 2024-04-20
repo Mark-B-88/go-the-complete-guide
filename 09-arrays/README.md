@@ -74,4 +74,42 @@ func main() {
 }
 ```
 
+## More ways of selecting slices
+
+We can also omit the "1" from the beginning of the slice and tell Go to only print out the first 3 items of the array.
+
+```go
+func main() {
+	prices := [4]float64{10.99, 9.99, 45.99, 20.0}
+
+	featuredPrices := prices[:3]
+	fmt.Println(featuredPrices) // 10.99, 9.99 45.99
+}
+```
+
+We can also the end of the slice and tell Go to start at the 2nd item of the array
+
+```go
+func main() {
+	prices := [4]float64{10.99, 9.99, 45.99, 20.0}
+
+	featuredPrices := prices[1:]
+	fmt.Println(featuredPrices) // 9.99 45.99 20.0
+}
+```
+
+> **_Important Note:_**: We can not use negative values in the slice like we can in Python, it's not valid
+
+We can also create a slice from another slice, notice how we are setting **_1:_** and also **_:1_**, it's pretty much a **_trim()_** method, that's why it only outputs 9.99
+
+```go
+func main() {
+	prices := [4]float64{10.99, 9.99, 45.99, 20.0}
+
+	featuredPrices := prices[1:]
+	highlightedPrices := featuredPrices[:1]
+	fmt.Println(highlightedPrices) // 9.99
+}
+```
+
 ---
