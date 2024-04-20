@@ -18,22 +18,28 @@ func (m floatMap) Output() {
 }
 
 func main() {
-	// userNames := make([]string, 2,5)
+	userNames := make([]string, 2,5)
 
-	// userNames = append(userNames, "Mark")
-	// userNames = append(userNames, "Frank")
+	userNames = append(userNames, "Mark")
+	userNames = append(userNames, "Frank")
 
-	// courseRatings := make(floatMap, 3)
-	// courseRatings["Go"] = 4.7
-	// courseRatings["React"] = 4.8
-	// courseRatings["Angular"] = 4.5
-	// courseRatings["Node"] = 4.3
+	fmt.Println(userNames)
+
+	for index, value := range userNames {
+		fmt.Println("Index: ", index)
+		fmt.Println("Value: ", value)
+	}
 
 	courseRatings := floatMap{
 		"Go":      4.7,
 		"React":   4.8,
 		"Angular": 4.5,
 		"Node":    4.3,
+	}
+
+	for key, value := range courseRatings {
+		fmt.Println("Key: ", key)
+		fmt.Println("Value: ", value)
 	}
 
 	courseRatings.Output()
