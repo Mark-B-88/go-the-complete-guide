@@ -112,4 +112,40 @@ func main() {
 }
 ```
 
+## Building dynamic lists with slices
+
+If you omit the amount in the array, Go will automatically create a slice for you, and since a slice is always based on an array, it will also create an array for you behind the scenes, but it wll automatically ditch that array and create a new array if your slice grows beyond the bounds of that **_behind the scenes stored_** array.
+
+```go
+func main() {
+	prices := []float64{10.99, 8.99}
+	fmt.Println(prices[1]) // 8.99
+}
+```
+
+We can also overwrite values, but we can not assign values to indexes that are not part of the slice.
+If we attempt to do so, it will crash because it's out of range.
+
+```go
+func main() {
+	prices := []float64{10.99, 8.99}
+	prices[1] = 9.99
+	fmt.Println(prices[1])
+	fmt.Println(prices)
+}
+```
+
+But what we can do is use the built-in `append()` function in Go, which takes a slice as a first value, and elements that should be added to a new slice. This will return a new slice with the **_appended_** value.
+
+```go
+func main() {
+	prices := []float64{10.99, 8.99}
+	prices[1] = 9.99
+	fmt.Println(prices) // // [10.99 9.99]
+
+	updatedPrices := append(prices, 5.99)
+	fmt.Println(updatedPrices) // [10.99 9.99 5.99]
+}
+```
+
 ---
