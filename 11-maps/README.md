@@ -208,3 +208,46 @@ func main() {
 	fmt.Println(string(prettyJSON))
 }
 ```
+
+# Using type aliases
+
+You could also use a **_type alias_** to:
+
+- Re-structure your code
+- Export / Import functions
+- Add a method to the type alias
+- Make the code cleaner
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// type alias
+type floatMap map[string]float64
+
+func (m floatMap) Output() {
+	prettyJSON, err := json.MarshalIndent(m, "", "  ")
+	if err != nil {
+		fmt.Println("Error marshaling to JSON:", err)
+		return
+	}
+	fmt.Println(string(prettyJSON))
+}
+
+func main() {
+	courseRatings := floatMap{
+		"Go":      4.7,
+		"React":   4.8,
+		"Angular": 4.5,
+		"Node":    4.3,
+	}
+
+	courseRatings.Output()
+}
+```
+
+---
