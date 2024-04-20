@@ -61,4 +61,17 @@ func main() {
 }
 ```
 
+## Selecting parts of arrays with slices
+
+This is a slice method similar to Python, in this example, we are starting from the 1st item all the way to the 3rd item, in the zero based array.
+
+```go
+func main() {
+	prices := [4]float64{10.99, 9.99, 45.99, 20.0}
+
+	featuredPrices := prices[1:3] // 9.99, 45.99, 20.0
+	fmt.Println(featuredPrices)
+}
+```
+
 ---
