@@ -10,23 +10,27 @@ Go is an open-source programming language developed by Google.
 
 - It was developed in 2007, and made public in 2009
 - Focuses on simplicity, clarity & scalability
-	- Inspired by languages like Python
+
+  - Inspired by languages like Python
     - Aims to provide a clean, understandable syntax
-    
+
 - High performance & focus on concurrency
-	- Similar to C or C++
+
+  - Similar to C or C++
     - Popular for tasks that benefit from multi-threading
-    
+
 - Batteries included
-	- Go comes with a standard library
+
+  - Go comes with a standard library
     - Many core features are built-in
-    
+
 - Static typing
-	- Go is a type-safe language
+
+  - Go is a type-safe language
     - Allows you to catch many errors early
-    
+
 - Popular Use Cases
-	- Networking & API's
+  - Networking & API's
     - Microservices
     - CLI Tools
 
@@ -69,5 +73,16 @@ Grouping Data & Functions Into Collections
 - What are Structs?
 - Creating & Using Structs
 - Adding Methods To Structs
+
+---
+
+# Arrays, Slices & Maps
+
+Storing Data in Collections
+
+- Understanding Arrays & Array limitations
+- Understanding & using slices
+- Slices Deep Dive
+- Understanding & Using Maps
 
 ---
