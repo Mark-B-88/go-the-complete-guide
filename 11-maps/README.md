@@ -177,3 +177,34 @@ func addComment(comments *[]Comment, text, username string) {
 ```
 
 ---
+
+# Allocating Memory in Advance
+
+If we know in advance how much space or slots we need in our map, we can simply use `make()` to pre-allocate the space.
+
+If we keep 3 items, Go won't have to re-allocate memory. If we pass more than 3 or the limit assigned, then Go will have to re-allocate memory.
+
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+func main() {
+	courseRatings := make(map[string]float64, 3)
+	courseRatings["Go"] = 4.7
+	courseRatings["React"] = 4.8
+	courseRatings["Angular"] = 4.5 // map limit before re-allocating memory
+	courseRatings["Node"] = 4.3 // re-allocate memory
+
+	prettyJSON, err := json.MarshalIndent(courseRatings, "", "  ")
+	if err != nil {
+		fmt.Println("Error marshaling to JSON:", err)
+		return
+	}
+
+	fmt.Println(string(prettyJSON))
+}
+```
