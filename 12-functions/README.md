@@ -156,3 +156,52 @@ func transformNumbers(numbers *[]int, transform func(int) int) []int {
 ```
 
 ---
+
+# Understanding Closures
+
+Slightly similar to JavaScript, Go also has the concept of **_lexical scope_** within functions. We have the option to either create an anonymous function, like the example above, but it's only limited to that specific function, or we could also pass another function that is flexible in it's logic in order to avoid creating multiple functions that serve either the same or similar results.
+
+Notice how the example in **_returning functions as values_** is quite verbose? The code below is one simple example of how to remedy that. Depending on our use-case, we could either use an **_anonymous function_**, or we could also use a specific **_design pattern_** function to handle our logic within it's **_closures_**.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	numbers := []int{1, 2, 3}
+
+	double := createTransformer(2)
+	triple := createTransformer(3)
+
+	transformed := transformNumbers(&numbers, func(number int) int {
+		return number * 2
+	})
+
+	doubled := transformNumbers(&numbers, double)
+	tripled := transformNumbers(&numbers, triple)
+
+	fmt.Println(transformed)
+	fmt.Println(doubled)
+	fmt.Println(tripled)
+}
+
+func transformNumbers(numbers *[]int, transform func(int) int) []int {
+	dNumbers := []int{}
+
+	for _, val := range *numbers {
+		dNumbers = append(dNumbers, transform(val))
+	}
+
+	return dNumbers
+}
+
+// Factory Function
+func createTransformer(factor int) func(int) int {
+	return func(number int) int {
+		return number * factor
+	}
+}
+```
+
+---
