@@ -4,6 +4,21 @@ This is a [Udemy course](https://www.udemy.com/course/go-the-complete-guide/) cr
 
 ---
 
+# Using Nodemon to Watch for File Changes
+
+```json
+{
+	"scripts": {
+		"watch": "nodemon --ext go --exec go run ."
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.0"
+	}
+}
+```
+
+---
+
 # What is Go?
 
 Go is an open-source programming language developed by Google.
@@ -84,5 +99,16 @@ Storing Data in Collections
 - Understanding & using slices
 - Slices Deep Dive
 - Understanding & Using Maps
+
+---
+
+# Functions Deep Dive
+
+Beyond the basics
+
+- Using Functions as Values
+- Anonymous Functions
+- Recursion
+- Variadic Functions
 
 ---
