@@ -124,3 +124,35 @@ func triple(number int) int { return number * 3 }
 ```
 
 ---
+
+# Introducing Anonymous Functions
+
+If you need to quickly add a function, and you don't plan on calling it anywhere else, you can use an **_anonymous function_**, like in this example:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	numbers := []int{1, 2, 3}
+
+	transformed := transformNumbers(&numbers, func(number int) int {
+		return number * 2
+	})
+
+	fmt.Println(transformed)
+}
+
+func transformNumbers(numbers *[]int, transform func(int) int) []int {
+	dNumbers := []int{}
+
+	for _, val := range *numbers {
+		dNumbers = append(dNumbers, transform(val))
+	}
+
+	return dNumbers
+}
+```
+
+---
