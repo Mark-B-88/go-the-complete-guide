@@ -42,3 +42,32 @@ func sumup(numbers ...int) int {
 ```
 
 ---
+
+# Splitting slices into parameter values
+
+Using the noation **_..._** in Go allows you to unpack a slice into individual values. It's useful when you have a function that accepts a variable number of arguments **_(variadic function)_**, and you want to pass elements of a slice to it as if they were individual arguments.
+
+Although not 100% accurate, you can kind of think of it similar to JavaScript's **_rest operator_**.
+
+```go
+func main() {
+	numbers := []int{1, 10, 15}
+	sum := sumup(1, 10, 15, 40, -5)
+	anotherSum := sumup(numbers...)
+
+	fmt.Println(sum)
+	fmt.Println(anotherSum)
+}
+
+func sumup(numbers ...int) int {
+	sum := 0
+
+	for _, value := range numbers {
+		sum += value
+	}
+
+	return sum
+}
+```
+
+---
