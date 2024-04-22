@@ -1,0 +1,11 @@
+{
+	"name": "15-price-calculator",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"watch": "nodemon --ext go --exec go run ."
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.0"
+	}
+}
