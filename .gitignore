@@ -1,1 +1,6 @@
+# node packages
 node_modules
+
+# Ignore files matching pattern result_<dynamic-value>.json
+result_*.json
+result.json
