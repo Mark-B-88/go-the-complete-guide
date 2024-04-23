@@ -10,13 +10,13 @@ func greet(phrase string) {
 }
 
 func slowGreet(phrase string) {
-	time.Sleep(3 * time.Second)
+	time.Sleep(3 * time.Second) // Simulate a slow, long-taking task
 	fmt.Println("Hello", phrase)
 }
 
 func main() {
-	greet("Nice to meet you!")
-	greet("How are you?")
-	slowGreet("How...are...you...?")
-	greet("Do you like the course?")
+	go greet("Nice to meet you!")
+	go greet("How are you?")
+	go slowGreet("How...are...you...?")
+	go greet("Do you like the course?")
 }

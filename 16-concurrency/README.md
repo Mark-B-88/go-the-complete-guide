@@ -40,3 +40,18 @@ func main() {
 You can run code in parallel and functions concurrently by using a feature called **_Goroutines_**
 
 ---
+
+# Running functions as goroutines
+
+Adding `go` in front of a function will make it run in parallel. Notice though that when you run `go run .`, it finshes very fast, but does not console log anything.
+
+```go
+func main() {
+	go greet("Nice to meet you!")
+	go greet("How are you?")
+	go slowGreet("How...are...you...?")
+	go greet("Do you like the course?")
+}
+```
+
+---
