@@ -112,3 +112,13 @@ Beyond the basics
 - Variadic Functions
 
 ---
+
+# Concurrency
+
+Running Tasks In Parallel
+
+- Understanding Goroutines
+- Sending Data with Channels
+- Controlling Code Flow & Simultaneous Tasks
+
+---
