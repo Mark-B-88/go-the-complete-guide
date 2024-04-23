@@ -2,25 +2,30 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 )
 
-// func greet(phrase string) {
-// 	fmt.Println("Hello!", phrase)
-// }
+func greet(phrase string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fmt.Println("Hello!", phrase)
+}
 
-func slowGreet(phrase string, doneChan chan bool) {
+func slowGreet(phrase string, wg *sync.WaitGroup) {
+	defer wg.Done()
 	time.Sleep(3 * time.Second) // Simulate a slow, long-taking task
 	fmt.Println("Hello", phrase)
-	doneChan <- true
 }
 
 func main() {
-	// go greet("Nice to meet you!")
-	// go greet("How are you?")
-	done := make(chan bool)
+	var wg sync.WaitGroup
 
-	go slowGreet("How...are...you...?", done)
-	// go greet("Do you like the course?")
-	<- done
+	wg.Add(4)
+
+	go greet("Nice to meet you!", &wg)
+	go greet("How are you?", &wg)
+	go slowGreet("How...are...you...?", &wg)
+	go greet("Do you like the course?", &wg)
+
+	wg.Wait()
 }

@@ -41,6 +41,53 @@ You can run code in parallel and functions concurrently by using a feature calle
 
 ---
 
+# Using Channels
+
+We can pass a **_channel_** as another parameter in our functions by providing it a name, then the `chan` keyword so that Go understands it's a **_channel_** and then the channel type, **_string, float, bool, etc_**
+
+The `<-` operator is used for communication operations on channels. Its behavior depends on whether it's used on the left side or the right side of an expression.
+
+`doneChan <- true` in this case denotes a **_send operation_**, this operation sends the value into the channel.
+
+When `<-` is used to the right of the channel variable `(variable := <-channel)`, it denotes a **_receive operation_**.
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+// func greet(phrase string) {
+// 	fmt.Println("Hello!", phrase)
+// }
+
+func slowGreet(phrase string, doneChan chan bool) {
+	time.Sleep(3 * time.Second) // Simulate a slow, long-taking task
+	fmt.Println("Hello", phrase)
+	doneChan <- true
+}
+
+func main() {
+	// go greet("Nice to meet you!")
+	// go greet("How are you?")
+	done := make(chan bool)
+
+	go slowGreet("How...are...you...?", done)
+	// go greet("Do you like the course?")
+	<- done
+}
+```
+
+The channel `done` is used to coordinate the termination of the `slowGreet()` goroutine with the main goroutine, ensuring that the main goroutine waits until the slowGreet goroutine completes its task before proceeding further.
+
+- `doneChan <- true`: This is a send operation, sending the boolean value true into the doneChan channel.
+
+- `<-done`: This is a receive operation, receiving a value from the done channel. It waits until a value is sent into the channel.
+
+---
+
 # Running functions as goroutines
 
 Adding `go` in front of a function will make it run in parallel. Notice though that when you run `go run .`, it finshes very fast, but does not console log anything?
@@ -94,51 +141,8 @@ func main() {
 }
 ```
 
----
+In this version, we use a `sync.WaitGroup` to wait for all goroutines to finish. Each goroutine calls `wg.Done()` when it completes, and `main()` calls `wg.Wait()` to block until all `Done()` calls have been made. This ensures that the main goroutine waits for all other goroutines to finish before exiting the program.
 
-# Using Channels
-
-We can pass a **_channel_** as another parameter in our functions by providing it a name, then the `chan` keyword so that Go understands it's a **_channel_** and then the channel type, **_string, float, bool, etc_**
-
-The `<-` operator is used for communication operations on channels. Its behavior depends on whether it's used on the left side or the right side of an expression.
-
-`doneChan <- true` in this case denotes a **_send operation_**, this operation sends the value into the channel.
-
-When `<-` is used to the right of the channel variable `(variable := <-channel)`, it denotes a **_receive operation_**.
-
-```go
-package main
-
-import (
-	"fmt"
-	"time"
-)
-
-// func greet(phrase string) {
-// 	fmt.Println("Hello!", phrase)
-// }
-
-func slowGreet(phrase string, doneChan chan bool) {
-	time.Sleep(3 * time.Second) // Simulate a slow, long-taking task
-	fmt.Println("Hello", phrase)
-	doneChan <- true
-}
-
-func main() {
-	// go greet("Nice to meet you!")
-	// go greet("How are you?")
-	done := make(chan bool)
-
-	go slowGreet("How...are...you...?", done)
-	// go greet("Do you like the course?")
-	<- done
-}
-```
-
-The channel `done` is used to coordinate the termination of the `slowGreet()` goroutine with the main goroutine, ensuring that the main goroutine waits until the slowGreet goroutine completes its task before proceeding further.
-
-- `doneChan <- true`: This is a send operation, sending the boolean value true into the doneChan channel.
-
-- `<-done`: This is a receive operation, receiving a value from the done channel. It waits until a value is sent into the channel.
+This is the correct way to execute this fairly simple example.
 
 ---
