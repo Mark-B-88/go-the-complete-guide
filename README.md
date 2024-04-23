@@ -122,3 +122,12 @@ Running Tasks In Parallel
 - Controlling Code Flow & Simultaneous Tasks
 
 ---
+
+# REST API
+
+Building a REST API with Go
+
+- Planning The Project
+- Building the REST API Step By Step
+
+---
