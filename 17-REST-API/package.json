@@ -1,0 +1,12 @@
+{
+	"name": "17-rest-api",
+	"version": "1.0.0",
+	"description": "A Go Powered Event Booking REST API",
+	"main": "index.js",
+	"scripts": {
+		"watch": "nodemon --ext go --exec go run ."
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.0"
+	}
+}
