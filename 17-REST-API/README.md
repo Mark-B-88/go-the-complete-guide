@@ -39,3 +39,11 @@ func getEvents(context *gin.Context) {
 ```
 
 ---
+
+# Setting up an event model
+
+```go
+// code here...
+```
+
+---
