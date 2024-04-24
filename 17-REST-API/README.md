@@ -198,3 +198,99 @@ func creteTables() {
 Due to an issue with gcc complier and issues with MinGW configuration on Windows, I have decided to continue this project in Linux. During installation of Go on Linux, I am now running **_go version go1.19.8 linux/amd64_**, for this reason that is why go.mod was changed from version 1.22.2 to version 1.19
 
 ---
+
+# Storing Data in the database
+
+```go
+package models
+
+import (
+	"time"
+
+	"example.com/rest-api/db"
+)
+
+type Event struct {
+	ID          int64
+	Name        string `binding:"required"`
+	Description string `binding:"required"`
+	Location    string `binding:"required"`
+	DateTime    time.Time `binding:"required"`
+	UserID int
+}
+
+var events = []Event{}
+
+func (e Event)Save() error {
+	query := `
+	INSERT INTO events(name, description, location, dateTime, user_id)
+	VALUES (?, ?, ?, ?, ?)
+	`
+	stmt, err := db.DB.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+	result, err := stmt.Exec(e.Name, e.Description, e.Location, e.DateTime, e.UserID)
+
+	if err != nil {
+		return err
+	}
+
+	id, err := result.LastInsertId()
+	e.ID = id
+	return err
+}
+
+func GetAllEvents() ([]Event, error) {
+	query := `SELECT * FROM events`
+	rows, err := db.DB.Query(query)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	var events []Event
+
+	for rows.Next() {
+		var event Event
+		err := rows.Scan(&event.ID, &event.Name, &event.Description, &event.Location, &event.DateTime, &event.UserID)
+
+		if err != nil {
+			return nil, err
+		}
+
+		events = append(events, event)
+	}
+
+	return events, nil
+}
+```
+
+---
+
+# Preparing Statements vs Directly Executing Queries (Prepare() vs Exec()/Query())
+
+- `DB.Exec()` (when we created the tables)
+- `Prepare() + stmt.Exec()` (when we inserted data into the database)
+- `DB.Query()` (when we fetched data from the database)
+
+Using `Prepare()` is 100% optional! You could send all your commands directly via `Exec()` or `Query()`.
+
+The difference between those two methods then just is whether you're fetching data from the database (=> use `Query()`) or your manipulating the database / data in the database (=> use `Exec()`).
+
+## But what's the advantage of using `Prepare()`?
+
+`Prepare()` prepares a **_SQL statement_** - this can lead to better performance if the same statement is executed multiple times (potentially with different data for its placeholders).
+
+This is only true, if the prepared statement is not closed `stmt.Close()` in between those executions. In that case, there wouldn't be any advantages.
+
+And, indeed, in this application, we are calling `stmt.Close()` directly after calling `stmt.Exec()`. So here, it really wouldn't matter which approach you're using.
+
+But in order to show you the different ways of using the sql package, I decided to also include this preparation approach in this course.
+
+---
