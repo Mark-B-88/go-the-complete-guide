@@ -1,6 +1,7 @@
 module example.com/rest-api
 
-go 1.22.2
+// go 1.22.2
+go 1.19
 
 require (
 	github.com/bytedance/sonic v1.11.5 // indirect

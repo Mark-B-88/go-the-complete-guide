@@ -192,3 +192,9 @@ func creteTables() {
 ```
 
 ---
+
+# Changing Go Versions
+
+Due to an issue with gcc complier and issues with MinGW configuration on Windows, I have decided to continue this project in Linux. During installation of Go on Linux, I am now running **_go version go1.19.8 linux/amd64_**, for this reason that is why go.mod was changed from version 1.22.2 to version 1.19
+
+---
