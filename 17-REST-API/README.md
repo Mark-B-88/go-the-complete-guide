@@ -13,3 +13,29 @@ A Go Powered **_Event Booking_** REST API
 - DELETE `/events/<id>/register` Cancel registration **_Auth Required_**
 
 ---
+
+# Setting up 1st route & handling our 1st request
+
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	server := gin.Default() // Configures HTTP Server
+
+	server.GET("/api/v1/events", getEvents)
+
+	server.Run(":8080") // localhost:8080
+}
+
+func getEvents(context *gin.Context) {
+	context.JSON(http.StatusOK, gin.H{"message": "Hello World!"})
+}
+```
+
+---
